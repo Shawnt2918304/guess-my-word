@@ -1,28 +1,48 @@
+# # COMMITTED OUT CODE Attempted GuessCount fix|  require_relative "guess_count.rb"
+require_relative "game_intro.rb"
+require_relative "word_builder.rb"
+
 # Define a class for the game
 class GuessMe
-    # Initialize the game with a word to guess and a number of guesses allowed
+# # Initialize the game with a word to guess and a number of guesses allowed
     attr_reader :word, :max_guesses
 
-    def initialize(word, max_guesses)
-      @word = word.downcase
-      @max_guesses = max_guesses
-      @guesses = []
+    def initialize
+      @word = WordBuilder.get_random_word
+      @max_guesses = @word["word"].length                         
+      @incorrect_guesses = []
+      @correct_guesses = []
     end
   
     # Play the game
     def play
       while !game_over?
         display_word
-        puts "Guess a letter (#{@max_guesses - @guesses.length} guesses remaining):"
+        puts "#{@word["hint"]}"
+        puts "You have #{@max_guesses} guesses remaining"
+        # puts @max_guesses
+        # puts @incorrect_guesses.length
         guess = gets.chomp.downcase
         if !valid_guess?(guess)
+          # puts "Guess a letter (#{@max_guesses - @guesses.length} guesses remaining):"
           puts "Invalid guess. Please enter a single letter."
-        elsif @word.include?(guess)
+        elsif ( @incorrect_guesses ).include?(guess)
+          puts "You already guessed that letter. Please try again."
+        elsif ( @correct_guesses ).include?(guess)
+          puts "You already guessed that letter. Please try again."
+        elsif @word["word"].include?(guess)
           puts "Correct!"
-          @guesses << guess
+          @correct_guesses << guess
+          @max_guesses += 1
+          if @max_guesses > @word["word"].length + 1
+            @max_guesses = @word["word"].length + 1
+          end
+          puts "You have #{@max_guesses} guesses remaining"
         else
           puts "Incorrect."
-          @guesses << guess
+          @incorrect_guesses << guess
+          @max_guesses -= 1
+          puts "You have #{@max_guesses} guesses remaining"
         end
       end
       display_result
@@ -32,18 +52,24 @@ class GuessMe
   
     # Check if the game is over
     def game_over?
-      @guesses.length == @max_guesses || word_guessed?
+      @max_guesses <= 0 || word_guessed?
     end
   
     # Check if the word has been completely guessed
     def word_guessed?
-      @word.chars.all? { |letter| @guesses.include?(letter) }
+      @word["word"].chars.all? { |letter| @correct_guesses.include?(letter) }
     end
   
+
+    # # Display word hint
+    # def display_hint
+    #   hint = hint
+    # end
+
     # Display the current state of the word, with underscores for unguessed letters
     def display_word
-      display = @word.chars.map do |letter|
-        @guesses.include?(letter) ? letter : "_"
+      display = @word["word"].chars.map do |letter|
+        @correct_guesses.include?(letter) ? letter : "_"
       end
       puts display.join(" ")
     end
@@ -51,9 +77,9 @@ class GuessMe
     # Display the result of the game
     def display_result
       if word_guessed?
-        puts "Congratulations, you guessed the word, \n#{@word.upcase}!"
+        puts "Congratulations, you guessed the word, \n#{@word["word"].upcase}!"
       else
-        puts "Sorry, you didn't guess the word. The word was #{@word.upcase}."
+        puts "Sorry, you didn't guess the word. The word was #{@word["word"].upcase}."
       end
     end
   
@@ -63,21 +89,8 @@ class GuessMe
     end
   end
   
-    
-  # Prints game introduction and instructions
-  puts "Hello! Welcome to GuessME the word guessing game!"
-  sleep(1)
-  puts "The objective of this game is to guess the correct word based off the the hint provided. The number of attempts you will have to guess the word depends on the number of letters in the word."
-  sleep(1)
-  puts "Let the game begin"
-  sleep(1)
-  puts "3"
-  sleep(1)
-  puts "2"
-  sleep(1)
-  puts "1"
-  sleep(0.5)
-  puts "WORD HINT: Yukihiro 'Matz' Matsumoto blended parts of his favorite programming languages (Perl, Smalltalk, Eiffel, Ada, and Lisp) to create this language."
+  
+  game_intro
 
 
 

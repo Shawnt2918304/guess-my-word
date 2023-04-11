@@ -1,8 +1,7 @@
 require_relative "guess_me.rb"
 
-  # Start the game
-word = "ruby"
-game = GuessMe.new(word, word.length)
+# Start the game
+game = GuessMe.new
 game.play
 
 
