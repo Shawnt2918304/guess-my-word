@@ -6,12 +6,32 @@ class WordBuilder
             "hint" => "WORD HINT: Yukihiro 'Matz' Matsumoto blended parts of his favorite programming languages (Perl, Smalltalk, Eiffel, Ada, and Lisp) to create this language."
         },
         {
-            "word" => "seven",
-            "hint" => "WORD HINT:seven"
+            "word" => "boolean",
+            "hint" => "WORD HINT: A data type that represents two values: true and false."
         },
         {
-            "word" => "tables",
-            "hint" => "WORD HINT:tables"
+            "word" => "aaray",
+            "hint" => "WORD HINT: A data structure that stores a collection of elements, each identified by an index or a key."
+        },
+        {
+            "word" => "method",
+            "hint" => "WORD HINT: A function that is associated with an object or a class in object-oriented programming."
+        },
+        {
+            "word" => "object",
+            "hint" => "WORD HINT: An instance of a class in object-oriented programming that has its own set of properties and methods."
+        },
+        {
+            "word" => "variable",
+            "hint" => "WORD HINT: A named storage location in a program that holds a value or a reference to an object."
+        },
+        {
+            "word" => "debugging",
+            "hint" => "WORD HINT: The process of finding and fixing errors in software code."
+        },
+        {
+            "word" => "algorithm",
+            "hint" => "WORD HINT: A set of instructions or steps that describe how to solve a problem or perform a task."
         }
     ]
 
