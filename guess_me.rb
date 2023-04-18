@@ -1,10 +1,8 @@
-# # COMMITTED OUT CODE Attempted GuessCount fix|  require_relative "guess_count.rb"
 require_relative "game_intro.rb"
 require_relative "word_builder.rb"
 
 # Define a class for the game
 class GuessMe
-# # Initialize the game with a word to guess and a number of guesses allowed
     
   attr_reader :max_guesses
 
@@ -29,8 +27,6 @@ class GuessMe
         display_word
         puts hint
         puts "You have #{@max_guesses} guesses remaining"
-        # puts @max_guesses
-        # puts @incorrect_guesses.length
         guess = gets.chomp.downcase
         if !valid_guess?(guess)
           puts "Invalid guess. Please enter a single letter."
@@ -66,7 +62,6 @@ class GuessMe
     def word_guessed?
       # word == @correct_guesses
       word.chars.all? { |letter| @correct_guesses.include?(letter) }
-
     end
 
     # Display the current state of the word, with underscores for unguessed letters

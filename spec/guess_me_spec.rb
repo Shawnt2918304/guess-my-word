@@ -18,24 +18,44 @@ RSpec.describe GuessMe do
         end
 
         it "#word_guessed?" do
+            game.instance_variable_set(:@correct_guesses,"blu")
             expect(game.word_guessed?).to eq(false)
             
             game.instance_variable_set(:@correct_guesses,"red")
             expect(game.word_guessed?).to eq(true)
+            
+            game.instance_variable_set(:@correct_guesses,"rde")
+            expect(game.word_guessed?).to eq(true)
+
+            game.instance_variable_set(:@correct_guesses,"edr")
+            expect(game.word_guessed?).to eq(true)
+
+            game.instance_variable_set(:@correct_guesses,"erd")
+            expect(game.word_guessed?).to eq(true)
+
+            game.instance_variable_set(:@correct_guesses,"dre")
+            expect(game.word_guessed?).to eq(true)
 
             game.instance_variable_set(:@correct_guesses,"der")
-            expect(game.word_guessed?).to eq(false)
-
-            game.instance_variable_set(:@correct_guesses,"re")
-            expect(game.word_guessed?).to eq(false)
-
-            game.instance_variable_set(:@correct_guesses,"redd")
-            expect(game.word_guessed?).to eq(false)
+            expect(game.word_guessed?).to eq(true)
 
         end
 
-        it "valid_guess?" do
-            expect(game.word.length).to eq(1)
+        describe "#valid_guess?" do
+            it "returns for a valid guess" do
+                expect(game.valid_guess?("r")).to be true
+            end
+
+            it "returns false for an invalid guess" do
+                expect(game.valid_guess?("3")).to be false
+                expect(game.valid_guess?("red")).to be false
+                expect(game.valid_guess?(" ")).to be false
+                expect(game.valid_guess?("")).to be false
+                expect(game.valid_guess?("rd")).to be false
+                expect(game.valid_guess?("!")).to be false
+
+
+            end
         end
 end
 
