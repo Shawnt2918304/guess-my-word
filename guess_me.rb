@@ -31,9 +31,9 @@ class GuessMe
         if !valid_guess?(guess)
           puts "Invalid guess. Please enter a single letter."
         elsif ( @incorrect_guesses ).include?(guess)
-          puts "You already guessed that letter. Please try again."
+          puts "You already guessed this letter. Please try again."
         elsif ( @correct_guesses ).include?(guess)
-          puts "You already guessed that letter. Please try again."
+          puts "You already guessed this letter. Please try again."
         elsif word.include?(guess)
           puts "Correct!"
           @correct_guesses << guess
@@ -60,14 +60,13 @@ class GuessMe
   
     # Check if the word has been completely guessed
     def word_guessed?
-      # word == @correct_guesses
       word.chars.all? { |letter| @correct_guesses.include?(letter) }
     end
 
     # Display the current state of the word, with underscores for unguessed letters
     def display_word
       display = word.chars.map do |letter|
-        @correct_guesses.include?(letter) ? letter : "_"
+        @correct_guesses.include?(letter) ? letter : "_" 
       end
       puts display.join(" ")
     end
