@@ -16,7 +16,7 @@ def game_intro
     # sleep(1)
     # puts "1.."
     # puts "\n"
-    # sleep(1)
+    sleep(1)
     puts "Let the game begin"
     puts "\n"
     puts "\n"
